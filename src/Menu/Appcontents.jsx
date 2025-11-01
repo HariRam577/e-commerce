@@ -22,7 +22,7 @@ const Appcontents = ({ setIsLoggedIn }) => {
   return (
     <div className="flex flex-col h-screen">
       {/* Header */}
-      <header className="flex justify-between items-center px-4 sm:px-6 md:px-8 py-3 sm:py-4 shadow-lg">
+      <header className="flex justify-between items-center dark:bg-gray-800 px-4 sm:px-6 md:px-8 py-3 sm:py-4 shadow-lg">
         {/* Mobile Menu Button */}
         <button
           onClick={toggleSidebar}
