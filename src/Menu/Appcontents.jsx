@@ -86,7 +86,7 @@ const Appcontents = ({ setIsLoggedIn }) => {
                 ? "translate-x-0"
                 : "-translate-x-full lg:translate-x-0"
             }
-            bg-white dark:bg-gray-900
+            
           `}
         >
           <div className="flex justify-between items-center mb-6 lg:block">
