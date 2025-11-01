@@ -83,7 +83,9 @@ const Appcontents = ({ setIsLoggedIn }) => {
             transform transition-transform duration-300 ease-in-out
             ${
               isSidebarOpen
-                ? "translate-x-0"
+                ? `translate-x-0 ${
+                    theme === "light" ? "bg-white" : "bg-gray-900"
+                  }`
                 : "-translate-x-full lg:translate-x-0"
             }
             
