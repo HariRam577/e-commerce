@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Smooth transition for all elements */
+* {
+  @apply transition-colors duration-300;
+}
+
+/* Light mode */
+body.light {
+  @apply bg-white text-gray-800;
+}
+
+/* Dark mode */
+body.dark {
+  @apply bg-gray-900 text-gray-200;
+}
+
+/* Light mode header shadow */
+body.light header {
+  @apply shadow-lg shadow-gray-300;
+}
+
+/* Dark mode header shadow (white glow) */
+body.dark header {
+  @apply shadow-lg shadow-white/20; /* subtle white shadow */
+}
+
+
+/* Headings */
+body.light h1, body.light h3 {
+  @apply text-gray-900;
+}
+body.dark h1, body.dark h2, body.dark h3 {
+  @apply text-gray-100;
+}
+
+/* Links */
+body.light a {
+  @apply text-blue-600 hover:text-blue-800;
+}
+body.dark a {
+  @apply text-blue-400 hover:text-blue-300;
+}
+
+body.light h1.theme-pill {
+  @apply bg-blue-500 text-white;
+}
+
+body.dark h1.theme-pill {
+  @apply bg-gray-200 text-gray-900;
+}
+
