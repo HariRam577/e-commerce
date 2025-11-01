@@ -19,18 +19,14 @@ const Appcontents = ({ setIsLoggedIn }) => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  const closeSidebar = () => {
-    setIsSidebarOpen(false);
-  };
-
   return (
     <div className="flex flex-col h-screen">
       {/* Header */}
-      <header className="flex justify-between items-center px-4 sm:px-6 md:px-8 py-3 sm:py-4 shadow-lg bg-white dark:bg-gray-900">
+      <header className="flex justify-between items-center px-4 sm:px-6 md:px-8 py-3 sm:py-4 shadow-lg">
         {/* Mobile Menu Button */}
         <button
           onClick={toggleSidebar}
-          className="lg:hidden p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800 text-gray-800 dark:text-gray-200"
+          className="lg:hidden p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800"
           aria-label="Toggle menu"
         >
           {isSidebarOpen ? (
@@ -75,7 +71,7 @@ const Appcontents = ({ setIsLoggedIn }) => {
         {isSidebarOpen && (
           <div
             className="fixed inset-0 bg-black/50 z-20 lg:hidden"
-            onClick={closeSidebar}
+            onClick={toggleSidebar}
           />
         )}
 
@@ -85,30 +81,31 @@ const Appcontents = ({ setIsLoggedIn }) => {
             fixed lg:static inset-y-0 left-0 z-30
             w-64 p-4 sm:p-6 flex flex-col shadow-lg
             transform transition-transform duration-300 ease-in-out
-            ${isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
+            ${
+              isSidebarOpen
+                ? "translate-x-0"
+                : "-translate-x-full lg:translate-x-0"
+            }
             bg-white dark:bg-gray-900
-            border-r border-gray-200 dark:border-gray-700
           `}
         >
           <div className="flex justify-between items-center mb-6 lg:block">
-            <h2 className="text-base sm:text-lg font-semibold border-b border-gray-300 dark:border-gray-700 pb-3 text-gray-900 dark:text-gray-100">
+            <h2 className="text-base sm:text-lg font-semibold border-b border-gray-700 pb-3">
               Navigation
             </h2>
             <button
-              onClick={closeSidebar}
-              className="lg:hidden p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800 text-gray-800 dark:text-gray-200"
+              onClick={toggleSidebar}
+              className="lg:hidden p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
-          <div onClick={closeSidebar}>
-            <SideBar />
-          </div>
+          <SideBar />
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 p-2 sm:p-4 md:p-6 overflow-y-auto rounded-tl-3xl shadow-inner bg-gray-50 dark:bg-gray-800">
-          <div className="rounded-2xl shadow-md p-3 sm:p-4 md:p-6 min-h-[87vh] border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
+        <main className="flex-1 p-2 sm:p-4 md:p-6 overflow-y-auto rounded-tl-3xl shadow-inner">
+          <div className="rounded-2xl shadow-md p-3 sm:p-4 md:p-6 min-h-[87vh] border border-gray-200">
             <Outlet />
           </div>
         </main>
