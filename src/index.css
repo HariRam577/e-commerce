@@ -1,7 +1,12 @@
 @import "tailwindcss";
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
-/* Smooth transition for all elements */
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+/* Define custom dark variant */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Define your theme tokens */
+@theme {
+  --color-theme: #ffffff;
+  --color-theme-dark: #0b0b0b;
+  --color-primary: #2563eb; /* example */
+  --color-secondary: #9333ea; /* example */
+}

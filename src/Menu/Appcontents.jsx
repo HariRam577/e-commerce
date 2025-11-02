@@ -22,7 +22,7 @@ const Appcontents = ({ setIsLoggedIn }) => {
   return (
     <div className="flex flex-col h-screen">
       {/* Header */}
-      <header className="flex justify-between items-center dark:bg-gray-800 px-4 sm:px-6 md:px-8 py-3 sm:py-4 shadow-lg">
+      <header className="flex justify-between bg-theme dark:bg-theme-dark  items-center px-4 sm:px-6 md:px-8 py-3 sm:py-4 shadow-lg dark:shadow-white">
         {/* Mobile Menu Button */}
         <button
           onClick={toggleSidebar}
@@ -36,7 +36,13 @@ const Appcontents = ({ setIsLoggedIn }) => {
           )}
         </button>
 
-        <h1 className="theme-pill text-xl sm:text-2xl font-bold tracking-wide rounded-full bg-white-500 text-white p-2">
+        <h1
+          className="text-xl sm:text-2xl font-bold tracking-wide rounded-full 
+  px-4 py-2 transition-all duration-300 
+  bg-theme text-black 
+  dark:bg-theme-dark dark:text-white 
+  border border-gray-200 dark:border-gray-700"
+        >
           HR
         </h1>
 
@@ -78,6 +84,7 @@ const Appcontents = ({ setIsLoggedIn }) => {
         {/* Sidebar */}
         <aside
           className={`
+            bg-theme text-black dark:bg-theme-dark dark:text-white
             fixed lg:static inset-y-0 left-0 z-30
             w-64 p-4 sm:p-6 flex flex-col shadow-lg
             transform transition-transform duration-300 ease-in-out
@@ -106,8 +113,8 @@ const Appcontents = ({ setIsLoggedIn }) => {
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 p-2 sm:p-4 md:p-6 overflow-y-auto rounded-tl-3xl shadow-inner">
-          <div className="rounded-2xl shadow-md p-3 sm:p-4 md:p-6 min-h-[87vh] border border-gray-200">
+        <main className="bg-theme text-black dark:bg-theme-dark dark:text-white flex-1 p-2 sm:p-4 md:p-6 overflow-y-auto shadow-inner">
+          <div className="rounded-2xl shadow-md p-2 sm:p-4 md:p-6 min-h-[87vh] border border-gray-200">
             <Outlet />
           </div>
         </main>

@@ -43,7 +43,7 @@ const ProductPage = () => {
               <h3 className="text-lg font-semibold mb-2">{product.title}</h3>
 
               {/* ✅ Description truncated to 220 characters */}
-              <p className="text-white-300 mb-4">
+              <p className=" mb-4">
                 {product.description.length > 130
                   ? `${product.description.slice(0, 130)}...`
                   : product.description}
