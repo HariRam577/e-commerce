@@ -33,12 +33,12 @@ const ProductPage = () => {
           {data.map((product) => (
             <div
               key={product.id}
-              className="flex flex-col border border-gray-300 rounded-lg p-4 shadow hover:shadow-lg transition-shadow duration-300"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
             >
               <img
                 src={product.image}
                 alt={product.title}
-                className="w-full h-48 object-cover mb-4 rounded"
+                className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
               />
               <h3 className="text-lg font-semibold mb-2">{product.title}</h3>
 

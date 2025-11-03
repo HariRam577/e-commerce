@@ -17,7 +17,7 @@ const Mycart = () => {
       <h3>My Cart</h3>
       {cartItems && (
         // Card wise list output
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {cartItems.map((product) => (
             <div
               key={product.id}
@@ -26,7 +26,7 @@ const Mycart = () => {
               <img
                 src={product.image}
                 alt={product.title}
-                className="w-full h-48 object-cover mb-4 rounded"
+                className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
               />
               <h3 className="text-lg font-semibold mb-2">
                 {product.title ? product.title : product.name}
