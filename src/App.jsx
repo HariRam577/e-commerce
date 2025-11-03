@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Appcontents from "./Menu/Appcontents";
 import AboutPage from "./Pages/AboutPage";
 import ProductPage from "./Pages/ProductPage";
-import UserProfile from "./Pages/UserProfile";
 import Login from "./Auth/Login";
 import { Provider } from "react-redux";
 import { Cartstore } from "./Cart/Cartstore";
@@ -37,7 +36,6 @@ const App = () => {
               <Route index element={<Dashboard />} />
               <Route path="about" element={<AboutPage />} />
               <Route path="products" element={<ProductPage />} />
-              <Route path="user-profile" element={<UserProfile />} />
               <Route path="my-cart" element={<Mycart />} />
             </Route>
           </Routes>
