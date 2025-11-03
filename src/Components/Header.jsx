@@ -12,12 +12,13 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { ThemeContext } from "../ContextApi/ThemeContext";
 
-const Header = ({ isSidebarOpen, toggleSidebar }) => {
+const Header = ({ isSidebarOpen, toggleSidebar, setIsLoggedIn }) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const cartItems = useSelector((state) => state.cart.cartItems);
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    setIsLoggedIn(false);
     localStorage.clear();
     navigate("/");
   };
