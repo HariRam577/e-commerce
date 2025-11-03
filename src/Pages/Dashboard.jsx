@@ -9,10 +9,13 @@ import {
   ArrowRight,
   Search,
 } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../Cart/Cartslice";
 
 export default function Dashboard() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
+  const dispatch = useDispatch();
 
   const categories = [
     { id: "all", name: "All Products", icon: Package },
@@ -107,8 +110,9 @@ export default function Dashboard() {
     return matchesCategory && matchesSearch;
   });
 
-  const addToCart = (product) => {
-    setCart([...cart, product]);
+  const addToCartList = (product) => {
+    dispatch(addToCart(product));
+    alert(`${product.name} added to cart!`);
   };
 
   const toggleWishlist = (productId) => {
@@ -241,7 +245,7 @@ export default function Dashboard() {
                 </div>
 
                 <button
-                  onClick={() => addToCart(product)}
+                  onClick={() => addToCartList(product)}
                   className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg"
                 >
                   <ShoppingCart className="w-5 h-5" />
