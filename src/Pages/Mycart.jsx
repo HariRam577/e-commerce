@@ -33,7 +33,7 @@ const Mycart = () => {
               </h3>
 
               {/* ✅ Description truncated to 220 characters */}
-              <p className="text-gray-700 mb-4">
+              <p className=" mb-4">
                 {product.description
                   ? product.description.length > 130
                     ? `${product.description.slice(0, 130)}...`
