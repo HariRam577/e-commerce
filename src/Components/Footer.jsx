@@ -10,13 +10,13 @@ const Footer = () => {
               <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                 ShopHub
               </h3>
-              <p className="text-gray-400">
+              <p className="bg-theme dark:bg-theme-dark text-black dark:text-white">
                 Your trusted online shopping destination
               </p>
             </div>
             <div>
               <h4 className="font-semibold mb-4">Quick Links</h4>
-              <ul className="space-y-2 text-gray-400">
+              <ul className="space-y-2 bg-theme dark:bg-theme-dark text-black dark:text-white">
                 <li>
                   <a href="#" className="hover:text-white transition">
                     Home
@@ -36,7 +36,7 @@ const Footer = () => {
             </div>
             <div>
               <h4 className="font-semibold mb-4">Support</h4>
-              <ul className="space-y-2 text-gray-400">
+              <ul className="space-y-2 bg-theme dark:bg-theme-dark text-black dark:text-white">
                 <li>
                   <a href="#" className="hover:text-white transition">
                     Contact
@@ -56,17 +56,17 @@ const Footer = () => {
             </div>
             <div>
               <h4 className="font-semibold mb-4">Newsletter</h4>
-              <p className="text-gray-400 mb-4 text-sm">
+              <p className="bg-theme dark:bg-theme-dark text-black dark:text-white mb-4 text-sm">
                 Subscribe for updates and deals
               </p>
               <input
                 type="email"
                 placeholder="Your email"
-                className="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:border-blue-500 outline-none"
+                className="w-full px-4 py-2 rounded-lg bg-theme dark:bg-theme-dark text-black dark:text-white border border-gray-700 focus:border-blue-500 outline-none"
               />
             </div>
           </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center bg-theme dark:bg-theme-dark text-black dark:text-white">
             <p>© 2024 ShopHub. All rights reserved.</p>
           </div>
         </div>
