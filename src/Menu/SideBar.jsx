@@ -7,7 +7,6 @@ const SideBar = () => {
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
     { name: "Products", path: "/products" },
-    { name: "User Profile", path: "/user-profile" },
     { name: "My Cart", path: "/my-cart" },
   ];
   return (

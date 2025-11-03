@@ -35,7 +35,7 @@ const Appcontents = ({ setIsLoggedIn }) => {
         </button>
 
         <h1 className="text-xl sm:text-2xl font-bold tracking-wide rounded-full px-4 py-2 transition-all duration-300 bg-theme text-black dark:bg-theme-dark dark:text-white border border-gray-200 dark:border-gray-700">
-          HR
+          ShopHub
         </h1>
 
         <div className="flex items-center gap-3 sm:gap-6">
@@ -77,7 +77,11 @@ const Appcontents = ({ setIsLoggedIn }) => {
             fixed lg:static inset-y-0 left-0 z-30
             w-64 p-4 sm:p-6 flex flex-col shadow-lg shadow-gray-300 dark:shadow-gray-900
             transform transition-transform duration-300 ease-in-out
-            ${isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
+            ${
+              isSidebarOpen
+                ? "translate-x-0"
+                : "-translate-x-full lg:translate-x-0"
+            }
           `}
         >
           <div className="flex justify-between items-center mb-6 lg:block">
