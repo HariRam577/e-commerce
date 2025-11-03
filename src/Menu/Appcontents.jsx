@@ -4,7 +4,7 @@ import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import Sidemenu from "../Components/Sidemenu";
 
-const Appcontents = () => {
+const Appcontents = ({ setIsLoggedIn }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -13,7 +13,11 @@ const Appcontents = () => {
 
   return (
     <div className="flex flex-col h-screen overflow-hidden">
-      <Header isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+      <Header
+        isSidebarOpen={isSidebarOpen}
+        toggleSidebar={toggleSidebar}
+        setIsLoggedIn={setIsLoggedIn}
+      />
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar */}
         <Sidemenu isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />

@@ -100,13 +100,15 @@ const Header = ({ isSidebarOpen, toggleSidebar, setIsLoggedIn }) => {
         </button>
 
         {/* Mobile Logout Icon */}
-        <button
-          onClick={handleLogout}
-          className="sm:hidden p-2 rounded-full bg-gradient-to-r from-red-500 to-rose-600 text-white hover:scale-105 transition-all"
-          aria-label="Logout"
-        >
-          <LogOut className="w-5 h-5" />
-        </button>
+        {isSidebarOpen && (
+          <button
+            onClick={handleLogout}
+            className="sm:hidden p-2 rounded-full bg-gradient-to-r from-red-500 to-rose-600 text-white hover:scale-105 transition-all"
+            aria-label="Logout"
+          >
+            <LogOut className="w-5 h-5" />
+          </button>
+        )}
       </div>
     </header>
   );
