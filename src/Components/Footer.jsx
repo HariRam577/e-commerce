@@ -67,7 +67,7 @@ const Footer = () => {
             </div>
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center bg-theme dark:bg-theme-dark text-black dark:text-white">
-            <p>© 2024 ShopHub. All rights reserved.</p>
+            <p>© 2025 ShopHub. All rights reserved.</p>
           </div>
         </div>
       </footer>

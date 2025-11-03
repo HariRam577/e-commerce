@@ -278,7 +278,7 @@ export default function AboutPage() {
                   return (
                     <div
                       key={index}
-                      className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6 hover:shadow-lg transition"
+                      className="bg-theme dark:bg-theme-dark text-black dark:text-white rounded-xl p-6 hover:shadow-lg transition"
                     >
                       <Icon className="w-10 h-10 text-blue-600 mb-4" />
                       <h4 className="text-xl font-bold  mb-2">{value.title}</h4>
@@ -403,7 +403,7 @@ export default function AboutPage() {
 
       {/* CTA Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl shadow-2xl overflow-hidden">
+        <div className="bg-theme dark:bg-theme-dark text-black dark:text-white rounded-3xl shadow-2xl overflow-hidden">
           <div className="px-8 py-16 text-center text-white">
             <h2 className="text-4xl font-bold mb-4">
               Ready to Start Shopping?
