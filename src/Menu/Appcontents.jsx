@@ -8,13 +8,11 @@ const Appcontents = ({ setIsLoggedIn }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const navigate = useNavigate();
   const { theme, toggleTheme } = useContext(ThemeContext);
-
   const handleLogout = () => {
     setIsLoggedIn(false);
     localStorage.clear();
     navigate("/");
   };
-
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
@@ -95,7 +93,6 @@ const Appcontents = ({ setIsLoggedIn }) => {
           </div>
           <SideBar />
         </aside>
-
         {/* Main Content */}
         <main className="bg-theme text-black dark:bg-theme-dark dark:text-white flex-1 p-2 sm:p-4 md:p-6 overflow-y-auto shadow-inner">
           <div className="rounded-2xl shadow-md p-2 sm:p-4 md:p-6 min-h-[87vh] border border-gray-200 dark:border-gray-700 bg-theme dark:bg-theme-dark">

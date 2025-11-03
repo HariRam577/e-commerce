@@ -9,6 +9,7 @@ import { Provider } from "react-redux";
 import { Cartstore } from "./Cart/Cartstore";
 import Mycart from "./Pages/Mycart";
 import ThemeProvider from "./ContextApi/ThemeContext";
+import Dashboard from "./Pages/Dashboard";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
@@ -33,7 +34,7 @@ const App = () => {
               }
             >
               {/* Nested routes inside layout */}
-              <Route index element={<h2>Welcome Home!</h2>} />
+              <Route index element={<Dashboard />} />
               <Route path="about" element={<AboutPage />} />
               <Route path="products" element={<ProductPage />} />
               <Route path="user-profile" element={<UserProfile />} />
