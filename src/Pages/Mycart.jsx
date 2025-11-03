@@ -28,13 +28,17 @@ const Mycart = () => {
                 alt={product.title}
                 className="w-full h-48 object-cover mb-4 rounded"
               />
-              <h3 className="text-lg font-semibold mb-2">{product.title}</h3>
+              <h3 className="text-lg font-semibold mb-2">
+                {product.title ? product.title : product.name}
+              </h3>
 
               {/* ✅ Description truncated to 220 characters */}
               <p className="text-gray-700 mb-4">
-                {product.description.length > 130
-                  ? `${product.description.slice(0, 130)}...`
-                  : product.description}
+                {product.description
+                  ? product.description.length > 130
+                    ? `${product.description.slice(0, 130)}...`
+                    : product.description
+                  : ""}
               </p>
 
               {/* ✅ Price + Add to Cart section fixed at bottom */}
