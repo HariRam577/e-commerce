@@ -1,20 +1,46 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { X, AlertTriangle, Trash2, ShoppingBag } from "lucide-react";
 import { removeFromCart } from "../Cart/Cartslice";
+import { useNavigate } from "react-router-dom";
 
 const Mycart = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const dispatch = useDispatch();
-  const handleRemoveFromCart = (productId) => {
-    console.log("clicked", productId);
+  const [showModal, setShowModal] = useState(false);
+  const [removedProduct, setRemovedProduct] = useState(null);
+  const navigate = useNavigate()
 
-    dispatch(removeFromCart(productId));
-    alert(`Product with id ${productId} removed from cart!`);
+  const handleRemoveFromCart = (product) => {
+    dispatch(removeFromCart(product.id));
+    setRemovedProduct(product);
+    setShowModal(true);
   };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setTimeout(() => setRemovedProduct(null), 300);
+  };
+
+  // Calculate total price
+  const totalPrice = cartItems.reduce((sum, item) => sum + item.price, 0);
+
   return (
     <div>
-      <h3>My Cart</h3>
+      <div className="flex justify-between items-center mb-6">
+        <h3 className="text-2xl font-bold">My Cart</h3>
+        {cartItems.length > 0 && (
+          <div className="text-right">
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              {cartItems.length} {cartItems.length === 1 ? "item" : "items"}
+            </p>
+            <p className="text-xl font-bold text-indigo-600 dark:text-indigo-400">
+              Total: ${totalPrice.toFixed(2)}
+            </p>
+          </div>
+        )}
+      </div>
+
       {cartItems.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-4 sm:p-6">
           {cartItems.map((product) => (
@@ -51,9 +77,10 @@ const Mycart = () => {
                     ${product.price}
                   </p>
                   <button
-                    onClick={() => handleRemoveFromCart(product.id)}
-                    className="bg-red-500 hover:bg-red-600 text-white text-sm sm:text-base font-medium py-2 px-4 rounded-lg transition-colors duration-300"
+                    onClick={() => handleRemoveFromCart(product)}
+                    className="bg-red-500 hover:bg-red-600 text-white text-sm sm:text-base font-medium py-2 px-4 rounded-lg transition-all duration-300 active:scale-95 flex items-center gap-2"
                   >
+                    <Trash2 className="w-4 h-4" />
                     Remove
                   </button>
                 </div>
@@ -74,10 +101,114 @@ const Mycart = () => {
           <p className="text-gray-500 dark:text-gray-400 text-sm sm:text-base mt-2">
             Add some products to see them here.
           </p>
+          <button
+            onClick={() => (window.location.href = "/products")}
+            className="mt-6 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors flex items-center gap-2"
+          >
+            <ShoppingBag className="w-5 h-5" />
+            Start Shopping
+          </button>
         </div>
       )}
 
+      {/* Remove Confirmation Modal */}
+      {showModal && removedProduct && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fadeIn">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full transform animate-slideUp">
+            {/* Header */}
+            <div className="flex justify-between items-center p-6 border-b border-gray-200 dark:border-gray-700">
+              <div className="flex items-center gap-3">
+                <div className="bg-red-100 dark:bg-red-900 p-2 rounded-full">
+                  <AlertTriangle className="w-6 h-6 text-red-600 dark:text-red-400" />
+                </div>
+                <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">
+                  Removed from Cart
+                </h2>
+              </div>
+              <button
+                onClick={closeModal}
+                className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors"
+              >
+                <X className="w-5 h-5 text-gray-500 dark:text-gray-400" />
+              </button>
+            </div>
 
+            {/* Product Details */}
+            <div className="p-6">
+              <div className="flex gap-4">
+                <div className="flex-shrink-0">
+                  <img
+                    src={removedProduct.image}
+                    alt={removedProduct.title}
+                    className="w-24 h-24 object-cover rounded-lg border border-gray-200 dark:border-gray-700"
+                  />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">
+                    {removedProduct.title || removedProduct.name}
+                  </h3>
+                  <p className="text-red-600 dark:text-red-400 font-bold text-lg">
+                    ${removedProduct.price}
+                  </p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                    This item has been removed from your cart.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Actions */}
+            <div className="flex gap-3 p-6 bg-gray-50 dark:bg-gray-900 rounded-b-2xl">
+              <button
+                onClick={closeModal}
+                className="flex-1 px-4 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-lg font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+              >
+                Close
+              </button>
+              <button
+                onClick={() => {
+                  closeModal();
+                 navigate("/products");
+                }}
+                className="flex-1 px-4 py-3 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition-colors flex items-center justify-center gap-2"
+              >
+                <ShoppingBag className="w-4 h-4" />
+                Continue Shopping
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <style jsx>{`
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+        @keyframes slideUp {
+          from {
+            transform: translateY(20px);
+            opacity: 0;
+          }
+          to {
+            transform: translateY(0);
+            opacity: 1;
+          }
+        }
+
+        .animate-fadeIn {
+          animation: fadeIn 0.2s ease-out;
+        }
+
+        .animate-slideUp {
+          animation: slideUp 0.3s ease-out;
+        }
+      `}</style>
     </div>
   );
 };
