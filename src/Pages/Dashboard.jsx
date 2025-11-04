@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../Cart/Cartslice";
+import { useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
   const [activeCategory, setActiveCategory] = useState("all");
@@ -21,6 +22,7 @@ export default function Dashboard() {
   const [showModal, setShowModal] = useState(false);
   const [addedProduct, setAddedProduct] = useState(null);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const categories = [
     { id: "all", name: "All Products", icon: Package },
@@ -338,7 +340,7 @@ export default function Dashboard() {
               <button
                 onClick={() => {
                   closeModal();
-                  window.location.href = "/my-cart";
+                  navigate("/my-cart");
                 }}
                 className="flex-1 px-4 py-3 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition-colors flex items-center justify-center gap-2"
               >
