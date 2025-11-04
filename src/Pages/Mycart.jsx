@@ -9,7 +9,7 @@ const Mycart = () => {
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
   const [removedProduct, setRemovedProduct] = useState(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleRemoveFromCart = (product) => {
     dispatch(removeFromCart(product.id));
@@ -102,7 +102,7 @@ const Mycart = () => {
             Add some products to see them here.
           </p>
           <button
-            onClick={() => (window.location.href = "/products")}
+            onClick={() => navigate("/products")}
             className="mt-6 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors flex items-center gap-2"
           >
             <ShoppingBag className="w-5 h-5" />
@@ -168,7 +168,7 @@ const Mycart = () => {
               <button
                 onClick={() => {
                   closeModal();
-                 navigate("/products");
+                  navigate("/products");
                 }}
                 className="flex-1 px-4 py-3 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition-colors flex items-center justify-center gap-2"
               >
