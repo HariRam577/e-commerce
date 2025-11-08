@@ -11,7 +11,7 @@ import {
   X,
   CheckCircle,
 } from "lucide-react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../Cart/Cartslice";
 import { useNavigate } from "react-router-dom";
 
@@ -32,7 +32,7 @@ export default function Dashboard() {
 
   const products = [
     {
-      id: 1,
+      id: 111,
       name: "Premium Wireless Headphones",
       price: 299.99,
       originalPrice: 399.99,
@@ -44,7 +44,7 @@ export default function Dashboard() {
       category: "trending",
     },
     {
-      id: 2,
+      id: 211,
       name: "Smart Watch Pro",
       price: 449.99,
       originalPrice: 599.99,
@@ -56,7 +56,7 @@ export default function Dashboard() {
       category: "deals",
     },
     {
-      id: 3,
+      id: 311,
       name: "Laptop Backpack",
       price: 79.99,
       originalPrice: 129.99,
@@ -68,7 +68,7 @@ export default function Dashboard() {
       category: "all",
     },
     {
-      id: 4,
+      id: 411,
       name: "Minimalist Sneakers",
       price: 129.99,
       originalPrice: 179.99,
@@ -80,7 +80,7 @@ export default function Dashboard() {
       category: "trending",
     },
     {
-      id: 5,
+      id: 511,
       name: "Designer Sunglasses",
       price: 199.99,
       originalPrice: 299.99,
@@ -92,7 +92,7 @@ export default function Dashboard() {
       category: "deals",
     },
     {
-      id: 6,
+      id: 611,
       name: "Portable Speaker",
       price: 89.99,
       originalPrice: 149.99,
@@ -104,7 +104,7 @@ export default function Dashboard() {
       category: "trending",
     },
   ];
-
+  const cartItems = useSelector((state) => state.cart.cartItems);
   const filteredProducts = products.filter((product) => {
     const matchesCategory =
       activeCategory === "all" || product.category === activeCategory;
@@ -115,9 +115,14 @@ export default function Dashboard() {
   });
 
   const addToCartList = (product) => {
-    dispatch(addToCart(product));
-    setAddedProduct(product);
-    setShowModal(true);
+    const isExist = cartItems.some((val) => val.id === product.id);
+    if (isExist) {
+      alert("Product already in Cart");
+    } else {
+      dispatch(addToCart(product));
+      setAddedProduct(product);
+      setShowModal(true);
+    }
   };
 
   const closeModal = () => {

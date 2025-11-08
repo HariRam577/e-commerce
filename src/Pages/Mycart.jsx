@@ -81,7 +81,6 @@ const Mycart = () => {
                     className="bg-red-500 hover:bg-red-600 text-white text-sm sm:text-base font-medium py-2 px-4 rounded-lg transition-all duration-300 active:scale-95 flex items-center gap-2"
                   >
                     <Trash2 className="w-4 h-4" />
-                    Remove
                   </button>
                 </div>
               </div>
@@ -158,7 +157,7 @@ const Mycart = () => {
             </div>
 
             {/* Actions */}
-            <div className="flex gap-3 p-6 bg-gray-50 dark:bg-gray-900 rounded-b-2xl">
+            <div className="flex gap-3 p-4 bg-gray-50 dark:bg-gray-900 rounded-b-2xl">
               <button
                 onClick={closeModal}
                 className="flex-1 px-4 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-lg font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { X, CheckCircle, ShoppingCart } from "lucide-react";
 import { addToCart } from "../Cart/Cartslice";
 import useFetch from "../CustomHook/useFetch";
@@ -12,12 +12,18 @@ const ProductPage = () => {
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
   const [addedProduct, setAddedProduct] = useState(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const cartItems = useSelector((state) => state.cart.cartItems);
 
   const handleAddToCart = (product) => {
-    dispatch(addToCart(product));
-    setAddedProduct(product);
-    setShowModal(true);
+    const isExist = cartItems.some((val) => val.id === product.id);
+    if (isExist) {
+      alert("Product already in Cart");
+    } else {
+      dispatch(addToCart(product));
+      setAddedProduct(product);
+      setShowModal(true);
+    }
   };
 
   const closeModal = () => {
@@ -78,7 +84,7 @@ const ProductPage = () => {
                   className="bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 active:scale-95 transition-all duration-200 flex items-center gap-2"
                 >
                   <ShoppingCart className="w-4 h-4" />
-                  Add to Cart
+                  Cart
                 </button>
               </div>
             </div>
