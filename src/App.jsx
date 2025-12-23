@@ -9,6 +9,9 @@ import { Cartstore } from "./Cart/Cartstore";
 import Mycart from "./Pages/Mycart";
 import ThemeProvider from "./ContextApi/ThemeContext";
 import Dashboard from "./Pages/Dashboard";
+import ProductDetail from "./Pages/ProductDetail";
+import Checkout from "./Pages/Checkout";
+import MyOrders from "./Pages/MyOrders";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
@@ -37,6 +40,9 @@ const App = () => {
               <Route path="about" element={<AboutPage />} />
               <Route path="products" element={<ProductPage />} />
               <Route path="my-cart" element={<Mycart />} />
+              <Route path="/product/:id" element={<ProductDetail />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/my-orders" element={<MyOrders />} />
             </Route>
           </Routes>
         </BrowserRouter>

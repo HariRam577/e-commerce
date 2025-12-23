@@ -4,12 +4,13 @@ import { Home, Info, Package, ShoppingCart } from "lucide-react";
 
 const SideBar = () => {
   const location = useLocation();
-  
+
   const navigationLinks = [
     { name: "Home", path: "/", icon: Home },
     { name: "About", path: "/about", icon: Info },
     { name: "Products", path: "/products", icon: Package },
-    { name: "My Cart", path: "/my-cart", icon: ShoppingCart },
+    // { name: "My Cart", path: "/my-cart", icon: ShoppingCart },
+    { name: "My Orders", path: "/my-orders", icon: ShoppingCart },
   ];
 
   const isActive = (path) => {
@@ -21,7 +22,7 @@ const SideBar = () => {
       {navigationLinks.map((link) => {
         const Icon = link.icon;
         const active = isActive(link.path);
-        
+
         return (
           <Link
             key={link.name}
@@ -32,7 +33,11 @@ const SideBar = () => {
                 : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
             }`}
           >
-            <Icon className={`w-5 h-5 ${active ? "text-indigo-600 dark:text-indigo-400" : ""}`} />
+            <Icon
+              className={`w-5 h-5 ${
+                active ? "text-indigo-600 dark:text-indigo-400" : ""
+              }`}
+            />
             <span>{link.name}</span>
           </Link>
         );

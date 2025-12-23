@@ -21,7 +21,10 @@ const Mycart = () => {
     setShowModal(false);
     setTimeout(() => setRemovedProduct(null), 300);
   };
-
+  const handleBuyNow = () => {
+    dispatch(addToCart({ ...product, quantity }));
+    navigate("/checkout");
+  };
   // Calculate total price
   const totalPrice = cartItems.reduce((sum, item) => sum + item.price, 0);
 
@@ -72,16 +75,26 @@ const Mycart = () => {
                 </p>
 
                 {/* Price + Remove button */}
-                <div className="flex items-center justify-between mt-auto pt-3 border-t border-gray-200 dark:border-gray-700">
-                  <p className="text-indigo-600 dark:text-indigo-400 font-bold text-sm sm:text-base">
+                <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-200 dark:border-gray-700 gap-2">
+                  <p className="text-indigo-600 dark:text-indigo-400 font-bold text-xl">
                     ${product.price}
                   </p>
-                  <button
-                    onClick={() => handleRemoveFromCart(product)}
-                    className="bg-red-500 hover:bg-red-600 text-white text-sm sm:text-base font-medium py-2 px-4 rounded-lg transition-all duration-300 active:scale-95 flex items-center gap-2"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => handleBuyNow(product)}
+                      className="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 active:scale-95 transition-all duration-200 flex items-center gap-2 text-sm font-semibold"
+                    >
+                      <ShoppingBag className="w-4 h-4" />
+                      Buy Now
+                    </button>
+                    <button
+                      onClick={() => handleRemoveFromCart(product)}
+                      className="bg-red-500 hover:bg-red-600 active:scale-95 text-white py-3 px-4 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 shadow-md"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                      Remove
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
