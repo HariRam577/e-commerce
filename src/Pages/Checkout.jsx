@@ -168,11 +168,14 @@ const Checkout = () => {
     setPlacingOrder(true);
 
     try {
-      const res = await fetch("http://localhost:5000/place-order", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ order, email: address.email }),
-      });
+      const res = await fetch(
+        "https://e-commerce-express-psi.vercel.app/place-order",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ order, email: address.email }),
+        }
+      );
 
       const data = await res.json();
 
