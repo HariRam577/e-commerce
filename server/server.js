@@ -1,11 +1,10 @@
 const express = require("express");
 const nodemailer = require("nodemailer");
-require("dotenv").config();
 
 const app = express();
 
 /* ===========================
-   MANUAL CORS (Vercel Safe)
+   MANUAL CORS
 =========================== */
 app.use((req, res, next) => {
   const allowedOrigins = [
@@ -39,13 +38,16 @@ app.use((req, res, next) => {
 app.use(express.json());
 
 /* ===========================
-   SMTP CONFIG (GMAIL – VERCEL SAFE)
+   🔐 HARDCODED EMAIL CONFIG
 =========================== */
+const EMAIL_USER = "hariram.dev18@gmail.com";
+const EMAIL_PASS = "cdgfyhqeyknbphbh"; // 🔴 use new one
+
 const transporter = nodemailer.createTransport({
-  service: "gmail", // ✅ IMPORTANT FOR VERCEL
+  service: "gmail",
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS, // Gmail App Password
+    user: EMAIL_USER,
+    pass: EMAIL_PASS,
   },
 });
 
@@ -56,26 +58,14 @@ transporter.verify((error) => {
   if (error) {
     console.error("❌ SMTP ERROR:", error);
   } else {
-    console.log("✅ SMTP ready");
+    console.log("✅ SMTP READY");
   }
-});
-
-/* ===========================
-   ENV CHECK (DEBUG ROUTE)
-=========================== */
-app.get("/env-check", (req, res) => {
-  res.json({
-    EMAIL_USER: !!process.env.EMAIL_USER,
-    EMAIL_PASS: !!process.env.EMAIL_PASS,
-  });
 });
 
 /* ===========================
    PLACE ORDER
 =========================== */
 app.post("/place-order", async (req, res) => {
-  console.log("📦 Incoming Order:", req.body);
-
   const { order, email } = req.body || {};
 
   if (!order || !order.address || !order.items || !email) {
@@ -85,67 +75,15 @@ app.post("/place-order", async (req, res) => {
     });
   }
 
-  const safeTotal = Number(order.total || 0);
-  const safeStatus = order.status || "Order Placed";
-
   const html = `
-<!DOCTYPE html>
-<html>
-<body style="font-family:Arial;background:#f8fafc;padding:20px">
-  <div style="max-width:600px;margin:auto;background:#fff;border-radius:8px;overflow:hidden">
-    <div style="background:#4f46e5;color:#fff;padding:20px;text-align:center">
-      <h2>Order Confirmed</h2>
-      <p>Thank you for shopping with Shophub</p>
-    </div>
-
-    <div style="padding:20px">
-      <p><strong>Hello ${order.address.name},</strong></p>
-      <p>Your order has been placed successfully.</p>
-
-      <h3>Delivery Details</h3>
-      <p>${order.address.street}, ${order.address.city}, ${
-    order.address.state
-  } - ${order.address.pincode}</p>
-      <p>Phone: ${order.address.phone}</p>
-      <p>Email: ${email}</p>
-
-      <hr />
-
-      <h3>Order Summary</h3>
-      <table width="100%" cellpadding="6">
-        ${order.items
-          .map(
-            (item) => `
-          <tr>
-            <td>${item.title} × ${item.quantity || 1}</td>
-            <td align="right">₹${(
-              Number(item.price || 0) * (item.quantity || 1)
-            ).toFixed(2)}</td>
-          </tr>
-        `
-          )
-          .join("")}
-      </table>
-
-      <p style="font-size:16px"><strong>Total:</strong> ₹${safeTotal.toFixed(
-        2
-      )}</p>
-      <p><strong>Status:</strong> ${safeStatus}</p>
-
-      <p>Thanks,<br/>Shophub Team</p>
-    </div>
-
-    <div style="background:#f1f5f9;text-align:center;padding:10px;font-size:12px">
-      © ${new Date().getFullYear()} Shophub
-    </div>
-  </div>
-</body>
-</html>
-`;
+    <h2>Order Confirmed</h2>
+    <p>Hello ${order.address.name}</p>
+    <p>Total: ₹${order.total}</p>
+  `;
 
   try {
     await transporter.sendMail({
-      from: `"Shophub" <${process.env.EMAIL_USER}>`,
+      from: `"Shophub" <${EMAIL_USER}>`,
       to: email,
       subject: "Shophub | Order Confirmation",
       html,
@@ -154,7 +92,6 @@ app.post("/place-order", async (req, res) => {
     res.json({
       success: true,
       message: "Order placed & email sent",
-      orderId: order.id,
     });
   } catch (err) {
     console.error("📧 ORDER MAIL ERROR:", err);
@@ -180,10 +117,10 @@ app.get("/test-mail", async (req, res) => {
 
   try {
     await transporter.sendMail({
-      from: `"Shophub" <${process.env.EMAIL_USER}>`,
+      from: `"Shophub" <${EMAIL_USER}>`,
       to: email,
       subject: "Shophub | Test Email",
-      html: "<h2>Test Email Successful ✅</h2>",
+      html: "<h3>Test email successful ✅</h3>",
     });
 
     res.json({
@@ -200,9 +137,9 @@ app.get("/test-mail", async (req, res) => {
 });
 
 /* ===========================
-   SERVER START
+   START SERVER
 =========================== */
-const PORT = process.env.PORT || 5000;
+const PORT = 5000; // ignored on Vercel, works locally
 app.listen(PORT, () => {
   console.log(`✅ Server running on port ${PORT}`);
 });
