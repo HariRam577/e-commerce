@@ -301,6 +301,7 @@ app.post("/place-order", async (req, res) => {
 // });
 app.get("/test-mail", async (req, res) => {
   const { email } = req.query || {}; // IMPORTANT: query, not body
+  console.log("email", email);
 
   if (!email) {
     return res.status(400).json({
