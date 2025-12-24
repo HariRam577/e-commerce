@@ -482,7 +482,7 @@ const Login = ({ setIsLoggedIn }) => {
               href="#"
               className="text-indigo-600 dark:text-indigo-400 hover:underline"
             >
-              Privacy Policy
+              Privacy Policys
             </a>
           </p>
         </div>
