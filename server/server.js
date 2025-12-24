@@ -68,6 +68,12 @@ transporter.verify((error) => {
     console.log("✅ SMTP ready to send emails");
   }
 });
+app.get("/env-check", (req, res) => {
+  res.json({
+    emailUser: !!process.env.EMAIL_USER,
+    emailPass: !!process.env.EMAIL_PASS,
+  });
+});
 
 /* ===========================
    POST /place-order
@@ -186,7 +192,6 @@ app.post("/place-order", async (req, res) => {
     });
   }
 });
-// app.get("/place-order", async (req, res) => {
 //   console.log("📦 Incoming order:", req.body);
 //   console.log("🌐 Origin:", req.headers.origin);
 //   console.log("📦 Request body:", req.body);
