@@ -300,13 +300,19 @@ app.post("/place-order", async (req, res) => {
 //   }
 // });
 app.get("/test-mail", async (req, res) => {
-  // ?email=someone@example.com
-  // const { email } = req.query || {};
+  const { email } = req.body || {};
+
+  if (!email) {
+    return res.status(400).json({
+      success: false,
+      message: "Email is required",
+    });
+  }
 
   try {
     await transporter.sendMail({
       from: `"Shophub" <${process.env.EMAIL_USER}>`,
-      to: "hariram007cm@gmail.com",
+      to: email,
       subject: "Shophub | Test Email",
       html: `
         <h2>Test Email from Shophub</h2>
