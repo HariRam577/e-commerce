@@ -300,7 +300,8 @@ app.post("/place-order", async (req, res) => {
 //   }
 // });
 app.get("/test-mail", async (req, res) => {
-  const { email } = req.body || {};
+  // GET /test-mail?email=...
+  const { email } = req.query || {};
 
   if (!email) {
     return res.status(400).json({
